@@ -1,0 +1,31 @@
+{
+  "name": "coding-challenge",
+  "version": "1.0.0",
+  "description": "This is a coding challenge",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yassineelidrissi/coding_challenge.git"
+  },
+  "author": "yassineelidrissi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yassineelidrissi/coding_challenge/issues"
+  },
+  "homepage": "https://github.com/yassineelidrissi/coding_challenge#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.7",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
