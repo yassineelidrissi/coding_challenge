@@ -33,7 +33,7 @@ const DataComponent = () => {
         <div className="data-wrapper">
             <h3>Manage my data</h3>
             <div className="data-items">
-                {usersData && usersData?.map((user) => (
+                {Array.isArray(usersData) && usersData?.map((user) => (
                     <div key={user._id} className="data-item">
                         <div className="data-content">
                             <p className="data-name">{user?.name}</p>
