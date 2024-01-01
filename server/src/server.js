@@ -14,6 +14,6 @@ if(process.env.NODE_ENV === 'development') {
 
 const PORT = process.env.PORT || 8080;
 let server;
-server = app.listen(PORT, () => console.log(`Server is running in ${process.env.NODE_ENV} on Port ${PORT}`));
+server = app.listen(PORT, () => console.log(`Server is running in ${process.env.NODE_ENV}`));
 
 export default server;
