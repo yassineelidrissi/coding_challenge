@@ -68,7 +68,7 @@ input[type="checkbox"] {
 }
 
 .container {
-    width: min(450px, 100%);
+    width: 450px;
     margin-inline: auto;
     background: var(--clr-card-bg);
     padding: 2rem;
@@ -94,6 +94,7 @@ input[type="checkbox"] {
     padding: 0.25rem;
     border-radius: 5px;
     cursor: pointer;
+    color: var(--clr-black-100);
 }
 .submit-data:hover,
 .my-data:hover {
@@ -246,7 +247,8 @@ input[type="checkbox"] {
 }
 
 .privacy-checkbox input {
-    width: 1rem;
+    width: 1.25rem;
+    margin-right: .25rem;
 }
 
 .privacy-checkbox p {
@@ -254,6 +256,7 @@ input[type="checkbox"] {
 }
 
 .submit-btn {
+
     padding: 0.6rem;
     background-color: var(--clr-primary);
     cursor: pointer;

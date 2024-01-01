@@ -85,7 +85,7 @@ const FormComponent = ({ selectedSectors, toggleSector }) => {
                       </span>
                     );
                   })}
-                {selectedSectors.length === 0 && (
+                {selectedSectorIds.length === 0 && (
                   <p className="placeholder">Select your options</p>
                 )}
               </div>
@@ -116,7 +116,11 @@ const FormComponent = ({ selectedSectors, toggleSector }) => {
         </div>
         {errors.termsAccepted && <p className="error-message">{errors.termsAccepted.message}</p>}
 
-        <button type="submit" className="submit-btn">Save</button>
+          <button type="submit" className="submit-btn" style={{ width: '100%' }}><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.5166 1.66699H6.48327C4.70827 1.66699 3.2666 3.11699 3.2666 4.88366V16.6253C3.2666 18.1253 4.3416 18.7587 5.65827 18.0337L9.72493 15.7753C10.1583 15.5337 10.8583 15.5337 11.2833 15.7753L15.3499 18.0337C16.6666 18.767 17.7416 18.1337 17.7416 16.6253V4.88366C17.7333 3.11699 16.2916 1.66699 14.5166 1.66699Z" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8.4917 9.16634L9.7417 10.4163L13.075 7.08301" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Save</button>
       </div>
     </form>
   );
