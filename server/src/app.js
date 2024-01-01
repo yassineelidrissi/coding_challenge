@@ -16,7 +16,11 @@ const __dirname = path.resolve();
 app.use(cors());
 app.options('*', cors());
 
-app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "'nonce-YourRandomNonceValue'"],
+    },
+}));
 
 const limiter = rateLimit({
     max: 100,
