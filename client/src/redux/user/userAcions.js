@@ -112,24 +112,23 @@ export const createUserData = (formData) => async (dispatch) => {
     }
 };
 
-export const updateUserData = (sector) => async (dispatch, getState) => {
-
+export const updateUserData = (userData) => async (dispatch, getState) => {
     try {
         dispatch({
             type: SECTOR_UPDATE_REQUEST
-        })
-    
-        const {data} = await axios.put(`${baseUrl}/`, sector);
-    
+        });
+
+        const { data } = await axios.put(`${baseUrl}/usersData/${userData._id}`, userData);
+
         dispatch({
             type: SECTOR_UPDATE_SUCCESS,
             payload: data
         });
-    
-    } catch(error) {
+
+    } catch (error) {
         dispatch({
             type: SECTOR_UPDATE_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
-        })
+        });
     }
-}
+};

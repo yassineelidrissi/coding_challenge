@@ -1,29 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { listSectors, createUserData } from './../redux/user/userAcions';
+import { useParams } from 'react-router-dom';
+import { listSectors, updateUserData, listUserDataDetails } from './../redux/user/userAcions';
 
-const FormComponent = ({ selectedSectors, toggleSector }) => {
+const EditFormComponent = ({ selectedSectors, toggleSector }) => {
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const [selectedSectorIds, setSelectedSectorIds] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedSectorIds, setSelectedSectorIds] = useState([]); // Store selected sector IDs
     const [sectorError, setSectorError] = useState('');
     const {
       register,
       handleSubmit,
       reset,
+      setValue,
       formState: { errors },
     } = useForm();
-  
-    const dispatch = useDispatch();
-  
+
     const sectorsList = useSelector((state) => state.sectorsList);
     const { sectors } = sectorsList;
-  
+
+    const sectorDetails = useSelector(state => state.sectorDetails);
+
+    const { sector } = sectorDetails;
+
     useEffect(() => {
-
-      dispatch(listSectors());
-
-    }, [dispatch]);
+        dispatch(listSectors());
+        if (!sector || sector._id !== id) {
+            dispatch(listUserDataDetails(id));
+        } else {
+            setValue('name', sector.name);
+            setSelectedSectorIds(sector.sectors.map((sector) => sector._id));
+        }
+    }, [dispatch, id, sector, setValue]);
   
     const handleDropdownClick = () => {
       setIsDropdownOpen(!isDropdownOpen);
@@ -40,29 +50,24 @@ const FormComponent = ({ selectedSectors, toggleSector }) => {
     const handleRemoveSector = (sectorId) => {
       setSelectedSectorIds(selectedSectorIds.filter((id) => id !== sectorId));
     };
-  
-    const handleSubmitForm = (data) => {
-      if (selectedSectorIds.length === 0) {
-        setSectorError('Please select at least one sector.');
-        return;
-      }
-  
-      const formData = {
-        name: data.name,
-        sectors: selectedSectorIds,
-      };
-  
-      dispatch(createUserData(formData));
 
-      reset();
+    const onSubmit = data => {
+        const updatedData = {
+            name: data.name,
+            sectors: selectedSectorIds,
+            _id: id
+        };
+        dispatch(updateUserData(updatedData));
 
-      setSelectedSectorIds([]);
+        reset();
+
+        setSelectedSectorIds([]);
 
     };
 
-  return (
-    <form className="form-wrapper is-active" onSubmit={handleSubmit(handleSubmitForm)}>
-      <h3>Enter name and select sectors involved.</h3>
+    return (
+        <form className="form-wrapper is-active" onSubmit={handleSubmit(onSubmit)}>
+      <h3>Update Your Data.</h3>
       <div className="inputs-wrapper">
         <div className="name-wrapper">
           <label htmlFor="name-input">Name</label>
@@ -116,10 +121,10 @@ const FormComponent = ({ selectedSectors, toggleSector }) => {
         </div>
         {errors.termsAccepted && <p className="error-message">{errors.termsAccepted.message}</p>}
 
-        <button type="submit" className="submit-btn">Save</button>
+        <button type="submit" className="submit-btn">Update</button>
       </div>
     </form>
-  );
+    );
 };
 
-export default FormComponent;
+export default EditFormComponent;
