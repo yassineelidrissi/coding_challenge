@@ -99,7 +99,7 @@ const FormComponent = ({ selectedSectors, toggleSector }) => {
           </div>
           {isDropdownOpen && (
             <div className='items-wrapper open'>
-              {sectors && sectors?.map((sector) => (
+              {sectors && Array.isArray(sectors) && sectors.map((sector) => (
                 <div key={sector._id} className={`item`} onClick={() => handleSectorClick(sector)}>
                   {sector.name}
                 </div>
