@@ -328,7 +328,8 @@ input[type="checkbox"] {
 
 @media (max-width: 768px) {
     .container {
-        width: 80%;
+        width: 95%;
+        padding: .875rem;
     }
     .switch-wrapper,
     .data-item {
